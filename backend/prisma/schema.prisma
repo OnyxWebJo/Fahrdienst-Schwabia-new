@@ -1,0 +1,104 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum BookingStatus {
+  NEW
+  CONFIRMED
+  DRIVER_ASSIGNED
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  ADMIN
+  STAFF
+}
+
+model Booking {
+  id               String        @id @default(uuid())
+  bookingNumber    String        @unique @map("booking_number")
+  routeId          String?       @map("route_id")
+  tripType         String        @default("oneWay") @map("trip_type")
+  pickupLocation   String        @map("pickup_location")
+  destination      String
+  pickupDate       String        @map("pickup_date")
+  pickupTime       String        @map("pickup_time")
+  returnDate       String?       @map("return_date")
+  returnTime       String?       @map("return_time")
+  passengerName    String        @map("passenger_name")
+  phone            String
+  email            String
+  passengersCount  Int           @default(1) @map("passengers_count")
+  luggageCount     Int           @default(1) @map("luggage_count")
+  childSeats       Int           @default(0) @map("child_seats")
+  flightNumber     String?       @map("flight_number")
+  specialRequests  String?       @map("special_requests") @db.Text
+  price            Decimal       @db.Decimal(10, 2)
+  status           BookingStatus @default(NEW)
+  createdAt        DateTime      @default(now()) @map("created_at")
+  updatedAt        DateTime      @updatedAt @map("updated_at")
+  deletedAt        DateTime?     @map("deleted_at")
+
+  @@map("bookings")
+}
+
+model Route {
+  id                 String   @id @default(uuid())
+  departureCity      String   @map("departure_city")
+  destinationAirport String   @map("destination_airport")
+  distanceKm         Int      @map("distance_km")
+  durationMinutes    Int      @map("duration_minutes")
+  basePrice          Decimal  @map("base_price") @db.Decimal(10, 2)
+  isActive           Boolean  @default(true) @map("is_active")
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  @@map("routes")
+}
+
+model AdminUser {
+  id           String    @id @default(uuid())
+  name         String
+  email        String    @unique
+  passwordHash String    @map("password_hash")
+  role         AdminRole @default(ADMIN)
+  isActive     Boolean   @default(true) @map("is_active")
+  lastLogin    DateTime? @map("last_login")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  @@map("admin_users")
+}
+
+model Setting {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     String   @db.Text
+  group     String   @default("general")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("settings")
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  adminUserId String   @map("admin_user_id")
+  action      String
+  entityType  String   @map("entity_type")
+  entityId    String   @map("entity_id")
+  oldValue    String?  @map("old_value") @db.Text
+  newValue    String?  @map("new_value") @db.Text
+  ipAddress   String?  @map("ip_address")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("audit_logs")
+}

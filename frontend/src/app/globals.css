@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #0f172a;
+    
+    /* Brand Navy Palette */
+    --navy-950: #070d18;
+    --navy-900: #0a1628;
+    --navy-800: #0f213d;
+    --navy-700: #162c52;
+    --navy-600: #1e3a6d;
+
+    /* Brand Gold Palette */
+    --gold-300: #f3dfa2;
+    --gold-400: #e6c675;
+    --gold-500: #d4a853;
+    --gold-600: #c3933c;
+    --gold-700: #9e7428;
+
+    /* Status Colors */
+    --whatsapp: #25d366;
+    --whatsapp-hover: #1ebd5b;
+
+    /* Fonts */
+    --font-inter: 'Inter', sans-serif;
+    --font-montserrat: 'Montserrat', sans-serif;
+  }
+}
+
+@theme {
+  --color-navy-950: #070d18;
+  --color-navy-900: #0a1628;
+  --color-navy-800: #0f213d;
+  --color-navy-700: #162c52;
+  --color-navy-600: #1e3a6d;
+
+  --color-gold-300: #f3dfa2;
+  --color-gold-400: #e6c675;
+  --color-gold-500: #d4a853;
+  --color-gold-600: #c3933c;
+  --color-gold-700: #9e7428;
+
+  --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #1ebd5b;
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-heading: var(--font-montserrat), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  color: var(--foreground);
+  background-color: var(--background);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a1628;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4a853;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c3933c;
+}
+
+/* Utility Classes */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #f3dfa2 0%, #d4a853 50%, #9e7428 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-bg {
+  background: linear-gradient(135deg, #e6c675 0%, #d4a853 50%, #c3933c 100%);
+}
+
+.gold-gradient-bg-hover:hover {
+  background: linear-gradient(135deg, #d4a853 0%, #c3933c 50%, #9e7428 100%);
+}
+
+.gold-border-glow {
+  box-shadow: 0 0 15px rgba(212, 168, 83, 0.25);
+  border: 1px solid rgba(212, 168, 83, 0.4);
+}
+
+.glass-navy {
+  background: rgba(10, 22, 40, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* =====================================================
+   MOBILE TOUCH & INTERACTION CRITICAL FIXES
+   ===================================================== */
+
+/* All interactive elements: remove tap delay & highlight */
+button,
+a,
+input,
+select,
+label {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Force stacking context on header so z-index works correctly on mobile */
+header {
+  isolation: isolate;
+}
