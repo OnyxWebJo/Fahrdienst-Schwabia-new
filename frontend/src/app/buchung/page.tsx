@@ -27,6 +27,14 @@ export function BookingContent({ lang = "de" }: { lang?: Locale }) {
     setCurrentPricing(getStoredPricing());
   }, []);
 
+  const getTodayDate = () => {
+    try {
+      return new Date().toISOString().split("T")[0];
+    } catch {
+      return "";
+    }
+  };
+
   // Form State
   const [tripType, setTripType] = useState<"oneWay" | "roundTrip">(
     (searchParams.get("tripType") as "oneWay" | "roundTrip") || "oneWay"
@@ -36,7 +44,7 @@ export function BookingContent({ lang = "de" }: { lang?: Locale }) {
   );
   const [pickup, setPickup] = useState(searchParams.get("pickup") || "Augsburg");
   const [destination, setDestination] = useState(searchParams.get("destination") || "MUC");
-  const [date, setDate] = useState(searchParams.get("date") || "");
+  const [date, setDate] = useState(searchParams.get("date") || getTodayDate());
   const [time, setTime] = useState(searchParams.get("time") || "08:00");
   const [returnDate, setReturnDate] = useState("");
   const [returnTime, setReturnTime] = useState("12:00");
@@ -67,10 +75,16 @@ export function BookingContent({ lang = "de" }: { lang?: Locale }) {
   const handleNextStep = (e: React.FormEvent) => {
     e.preventDefault();
     setStep((prev) => Math.min(prev + 1, 4));
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   const handlePrevStep = () => {
     setStep((prev) => Math.max(prev - 1, 1));
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   const handleFinalSubmit = (e: React.FormEvent) => {

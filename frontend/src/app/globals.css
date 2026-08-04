@@ -113,8 +113,3 @@ label {
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
-
-/* Force stacking context on header so z-index works correctly on mobile */
-header {
-  isolation: isolate;
-}

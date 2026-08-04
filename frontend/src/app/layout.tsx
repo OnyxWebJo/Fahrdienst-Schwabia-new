@@ -63,6 +63,8 @@ export default function RootLayout({
             gtag('config', 'G-YH0GQWZKYX', { page_path: window.location.pathname });
           `}
         </Script>
+        {/* Native Mobile & Tablet Interactions Handler */}
+        <Script src="/interactive.js" strategy="afterInteractive" />
       </head>
       <body
         suppressHydrationWarning

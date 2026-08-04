@@ -216,12 +216,16 @@ export function Header({ lang = "de" }: HeaderProps) {
               <Phone className="w-4 h-4" style={{ pointerEvents: "none" }} />
             </a>
 
-            {/* Burger Button — React state toggle, single handler only */}
+            {/* Burger Button — React state toggle, both onClick and onTouchEnd for touch devices */}
             <button
               type="button"
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileMenuOpen}
               onClick={() => setMobileMenuOpen((prev) => !prev)}
+              onTouchEnd={(e) => {
+                e.preventDefault();
+                setMobileMenuOpen((prev) => !prev);
+              }}
               style={{ touchAction: "manipulation" }}
               className="w-10 h-10 flex items-center justify-center rounded-xl bg-navy-800 border border-navy-700 text-white cursor-pointer select-none"
             >

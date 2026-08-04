@@ -16,22 +16,39 @@ export function BookingWidget({ lang = "de", preselectedAirport }: BookingWidget
   const isEn = lang === "en";
   const basePath = isEn ? "/en" : "";
 
+  const getTodayDate = () => {
+    try {
+      return new Date().toISOString().split("T")[0];
+    } catch {
+      return "";
+    }
+  };
+
   const [tripType, setTripType] = useState<"oneWay" | "roundTrip">("oneWay");
   const [direction, setDirection] = useState<"toAirport" | "fromAirport">("toAirport");
   const [pickup, setPickup] = useState("Augsburg");
   const [destination, setDestination] = useState(preselectedAirport || "MUC");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(getTodayDate());
   const [time, setTime] = useState("08:00");
   const [passengers, setPassengers] = useState("1");
 
+  const selectDirection = (dir: "toAirport" | "fromAirport") => {
+    setDirection(dir);
+  };
+
+  const selectTripType = (type: "oneWay" | "roundTrip") => {
+    setTripType(type);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const finalDate = date || getTodayDate();
     const params = new URLSearchParams({
       tripType,
       direction,
       pickup,
       destination,
-      date,
+      date: finalDate,
       time,
       passengers,
     });
@@ -67,8 +84,12 @@ export function BookingWidget({ lang = "de", preselectedAirport }: BookingWidget
               type="button"
               aria-pressed={direction === "toAirport"}
               style={{ touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}
-              onClick={() => setDirection("toAirport")}
-              className={`px-3 py-2.5 rounded-lg text-xs font-bold text-center transition-colors ${
+              onClick={() => selectDirection("toAirport")}
+              onTouchEnd={(e) => {
+                e.preventDefault();
+                selectDirection("toAirport");
+              }}
+              className={`px-3 py-2.5 rounded-lg text-xs font-bold text-center transition-colors cursor-pointer select-none ${
                 direction === "toAirport"
                   ? "gold-gradient-bg text-navy-950 shadow-md"
                   : "text-slate-400 hover:text-white"
@@ -80,8 +101,12 @@ export function BookingWidget({ lang = "de", preselectedAirport }: BookingWidget
               type="button"
               aria-pressed={direction === "fromAirport"}
               style={{ touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}
-              onClick={() => setDirection("fromAirport")}
-              className={`px-3 py-2.5 rounded-lg text-xs font-bold text-center transition-colors ${
+              onClick={() => selectDirection("fromAirport")}
+              onTouchEnd={(e) => {
+                e.preventDefault();
+                selectDirection("fromAirport");
+              }}
+              className={`px-3 py-2.5 rounded-lg text-xs font-bold text-center transition-colors cursor-pointer select-none ${
                 direction === "fromAirport"
                   ? "gold-gradient-bg text-navy-950 shadow-md"
                   : "text-slate-400 hover:text-white"
@@ -101,8 +126,12 @@ export function BookingWidget({ lang = "de", preselectedAirport }: BookingWidget
               type="button"
               aria-pressed={tripType === "oneWay"}
               style={{ touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}
-              onClick={() => setTripType("oneWay")}
-              className={`px-3 py-2.5 rounded-lg text-xs font-bold text-center transition-colors ${
+              onClick={() => selectTripType("oneWay")}
+              onTouchEnd={(e) => {
+                e.preventDefault();
+                selectTripType("oneWay");
+              }}
+              className={`px-3 py-2.5 rounded-lg text-xs font-bold text-center transition-colors cursor-pointer select-none ${
                 tripType === "oneWay"
                   ? "gold-gradient-bg text-navy-950 shadow-md"
                   : "text-slate-400 hover:text-white"
@@ -114,8 +143,12 @@ export function BookingWidget({ lang = "de", preselectedAirport }: BookingWidget
               type="button"
               aria-pressed={tripType === "roundTrip"}
               style={{ touchAction: "manipulation", WebkitTapHighlightColor: "transparent" }}
-              onClick={() => setTripType("roundTrip")}
-              className={`px-3 py-2.5 rounded-lg text-xs font-bold text-center transition-colors ${
+              onClick={() => selectTripType("roundTrip")}
+              onTouchEnd={(e) => {
+                e.preventDefault();
+                selectTripType("roundTrip");
+              }}
+              className={`px-3 py-2.5 rounded-lg text-xs font-bold text-center transition-colors cursor-pointer select-none ${
                 tripType === "roundTrip"
                   ? "gold-gradient-bg text-navy-950 shadow-md"
                   : "text-slate-400 hover:text-white"
@@ -263,7 +296,7 @@ export function BookingWidget({ lang = "de", preselectedAirport }: BookingWidget
 
           <button
             type="submit"
-            className="w-full sm:w-auto gold-gradient-bg gold-gradient-bg-hover text-navy-950 font-heading font-bold text-sm px-8 py-3.5 rounded-xl shadow-lg hover:shadow-gold-500/25 flex items-center justify-center gap-2 hover:scale-105 transition-all cursor-pointer"
+            className="w-full sm:w-auto gold-gradient-bg gold-gradient-bg-hover text-navy-950 font-heading font-bold text-sm px-8 py-3.5 rounded-xl shadow-lg hover:shadow-gold-500/25 flex items-center justify-center gap-2 hover:scale-105 transition-all cursor-pointer select-none"
           >
             <span>{dict.booking.calculatePrice}</span>
             <ArrowRight className="w-4 h-4" />
