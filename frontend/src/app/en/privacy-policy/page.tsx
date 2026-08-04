@@ -13,7 +13,7 @@ export default function EnglishPrivacyPage() {
     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100">
       <Header lang="en" />
 
-      <main className="flex-1 py-16">
+      <main className="flex-1 py-16 pb-24 lg:pb-0">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 bg-navy-900 border border-navy-800 p-8 sm:p-12 rounded-3xl shadow-2xl">
           <div className="border-b border-navy-800 pb-6 space-y-2">
             <span className="text-xs font-bold uppercase tracking-widest text-gold-400">GDPR Compliance</span>

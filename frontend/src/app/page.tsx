@@ -52,7 +52,7 @@ export default function GermanHomePage() {
       />
 
       <Header lang="de" />
-      <main className="flex-1">
+      <main className="flex-1 pb-24 lg:pb-0">
         <HeroSection lang="de" />
         <ServicesSection lang="de" />
         <WhyChooseUsSection lang="de" />

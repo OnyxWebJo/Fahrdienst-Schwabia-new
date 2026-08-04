@@ -43,7 +43,7 @@ export function AirportLandingPage({ lang = "de", config }: AirportLandingPagePr
     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100 selection:bg-amber-500 selection:text-white">
       <Header lang={lang} />
 
-      <main className="flex-1">
+      <main className="flex-1 pb-24 lg:pb-0">
         {/* Route Hero Section */}
         <section className="relative pt-10 pb-16 bg-navy-950 border-b border-navy-800 overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

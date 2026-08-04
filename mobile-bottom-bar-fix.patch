@@ -1,0 +1,143 @@
+diff --git a/frontend/src/app/agb/page.tsx b/frontend/src/app/agb/page.tsx
+index a0896d2..cf30b7f 100644
+--- a/frontend/src/app/agb/page.tsx
++++ b/frontend/src/app/agb/page.tsx
+@@ -13,7 +13,7 @@ export default function AGBPage() {
+     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100">
+       <Header lang="de" />
+ 
+-      <main className="flex-1 py-16">
++      <main className="flex-1 py-16 pb-24 lg:pb-0">
+         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 bg-navy-900 border border-navy-800 p-8 sm:p-12 rounded-3xl shadow-2xl">
+           <div className="border-b border-navy-800 pb-6 space-y-2">
+             <span className="text-xs font-bold uppercase tracking-widest text-gold-400">Rechtliches</span>
+diff --git a/frontend/src/app/buchung/page.tsx b/frontend/src/app/buchung/page.tsx
+index 6ffa502..93c84b9 100644
+--- a/frontend/src/app/buchung/page.tsx
++++ b/frontend/src/app/buchung/page.tsx
+@@ -689,7 +689,7 @@ export default function BookingPage({ params }: { params?: { lang?: Locale } })
+   return (
+     <div className="min-h-screen bg-navy-950 text-slate-100 flex flex-col justify-between">
+       <Header lang={lang} />
+-      <main className="flex-1">
++      <main className="flex-1 pb-24 lg:pb-0">
+         <Suspense fallback={<div className="text-center py-20 text-slate-400 text-xs">Loading booking form...</div>}>
+           <BookingContent lang={lang} />
+         </Suspense>
+diff --git a/frontend/src/app/datenschutz/page.tsx b/frontend/src/app/datenschutz/page.tsx
+index eddbf43..3f62e25 100644
+--- a/frontend/src/app/datenschutz/page.tsx
++++ b/frontend/src/app/datenschutz/page.tsx
+@@ -13,7 +13,7 @@ export default function DatenschutzPage() {
+     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100">
+       <Header lang="de" />
+ 
+-      <main className="flex-1 py-16">
++      <main className="flex-1 py-16 pb-24 lg:pb-0">
+         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 bg-navy-900 border border-navy-800 p-8 sm:p-12 rounded-3xl shadow-2xl">
+           <div className="border-b border-navy-800 pb-6 space-y-2">
+             <span className="text-xs font-bold uppercase tracking-widest text-gold-400">DSGVO / GDPR</span>
+diff --git a/frontend/src/app/en/buchung/page.tsx b/frontend/src/app/en/buchung/page.tsx
+index a647a88..a4dc040 100644
+--- a/frontend/src/app/en/buchung/page.tsx
++++ b/frontend/src/app/en/buchung/page.tsx
+@@ -11,7 +11,7 @@ export default function EnglishBookingPage() {
+   return (
+     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100">
+       <Header lang="en" />
+-      <main className="flex-1">
++      <main className="flex-1 pb-24 lg:pb-0">
+         <Suspense fallback={<div className="text-center py-20 text-slate-400">Loading booking form...</div>}>
+           <BookingContent lang="en" />
+         </Suspense>
+diff --git a/frontend/src/app/en/imprint/page.tsx b/frontend/src/app/en/imprint/page.tsx
+index e1c4968..0b91968 100644
+--- a/frontend/src/app/en/imprint/page.tsx
++++ b/frontend/src/app/en/imprint/page.tsx
+@@ -14,7 +14,7 @@ export default function EnglishImprintPage() {
+     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100">
+       <Header lang="en" />
+ 
+-      <main className="flex-1 py-16">
++      <main className="flex-1 py-16 pb-24 lg:pb-0">
+         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 bg-navy-900 border border-navy-800 p-8 sm:p-12 rounded-3xl shadow-2xl">
+           <div className="border-b border-navy-800 pb-6 space-y-2">
+             <span className="text-xs font-bold uppercase tracking-widest text-gold-400">Legal Info</span>
+diff --git a/frontend/src/app/en/page.tsx b/frontend/src/app/en/page.tsx
+index 1cf991e..4d54f69 100644
+--- a/frontend/src/app/en/page.tsx
++++ b/frontend/src/app/en/page.tsx
+@@ -52,7 +52,7 @@ export default function EnglishHomePage() {
+       />
+ 
+       <Header lang="en" />
+-      <main className="flex-1">
++      <main className="flex-1 pb-24 lg:pb-0">
+         <HeroSection lang="en" />
+         <ServicesSection lang="en" />
+         <WhyChooseUsSection lang="en" />
+diff --git a/frontend/src/app/en/privacy-policy/page.tsx b/frontend/src/app/en/privacy-policy/page.tsx
+index eb12c48..660036a 100644
+--- a/frontend/src/app/en/privacy-policy/page.tsx
++++ b/frontend/src/app/en/privacy-policy/page.tsx
+@@ -13,7 +13,7 @@ export default function EnglishPrivacyPage() {
+     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100">
+       <Header lang="en" />
+ 
+-      <main className="flex-1 py-16">
++      <main className="flex-1 py-16 pb-24 lg:pb-0">
+         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 bg-navy-900 border border-navy-800 p-8 sm:p-12 rounded-3xl shadow-2xl">
+           <div className="border-b border-navy-800 pb-6 space-y-2">
+             <span className="text-xs font-bold uppercase tracking-widest text-gold-400">GDPR Compliance</span>
+diff --git a/frontend/src/app/en/terms/page.tsx b/frontend/src/app/en/terms/page.tsx
+index 6eed2b8..e16d56b 100644
+--- a/frontend/src/app/en/terms/page.tsx
++++ b/frontend/src/app/en/terms/page.tsx
+@@ -13,7 +13,7 @@ export default function EnglishTermsPage() {
+     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100">
+       <Header lang="en" />
+ 
+-      <main className="flex-1 py-16">
++      <main className="flex-1 py-16 pb-24 lg:pb-0">
+         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 bg-navy-900 border border-navy-800 p-8 sm:p-12 rounded-3xl shadow-2xl">
+           <div className="border-b border-navy-800 pb-6 space-y-2">
+             <span className="text-xs font-bold uppercase tracking-widest text-gold-400">Legal Agreement</span>
+diff --git a/frontend/src/app/impressum/page.tsx b/frontend/src/app/impressum/page.tsx
+index 03deea5..c761e7b 100644
+--- a/frontend/src/app/impressum/page.tsx
++++ b/frontend/src/app/impressum/page.tsx
+@@ -14,7 +14,7 @@ export default function ImpressumPage() {
+     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100">
+       <Header lang="de" />
+ 
+-      <main className="flex-1 py-16">
++      <main className="flex-1 py-16 pb-24 lg:pb-0">
+         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 bg-navy-900 border border-navy-800 p-8 sm:p-12 rounded-3xl shadow-2xl">
+           <div className="border-b border-navy-800 pb-6 space-y-2">
+             <span className="text-xs font-bold uppercase tracking-widest text-gold-400">Rechtliches</span>
+diff --git a/frontend/src/app/page.tsx b/frontend/src/app/page.tsx
+index dda0bd4..7f03bd9 100644
+--- a/frontend/src/app/page.tsx
++++ b/frontend/src/app/page.tsx
+@@ -52,7 +52,7 @@ export default function GermanHomePage() {
+       />
+ 
+       <Header lang="de" />
+-      <main className="flex-1">
++      <main className="flex-1 pb-24 lg:pb-0">
+         <HeroSection lang="de" />
+         <ServicesSection lang="de" />
+         <WhyChooseUsSection lang="de" />
+diff --git a/frontend/src/components/templates/AirportLandingPage.tsx b/frontend/src/components/templates/AirportLandingPage.tsx
+index b1cbfc0..2dacb39 100644
+--- a/frontend/src/components/templates/AirportLandingPage.tsx
++++ b/frontend/src/components/templates/AirportLandingPage.tsx
+@@ -43,7 +43,7 @@ export function AirportLandingPage({ lang = "de", config }: AirportLandingPagePr
+     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100 selection:bg-amber-500 selection:text-white">
+       <Header lang={lang} />
+ 
+-      <main className="flex-1">
++      <main className="flex-1 pb-24 lg:pb-0">
+         {/* Route Hero Section */}
+         <section className="relative pt-10 pb-16 bg-navy-950 border-b border-navy-800 overflow-hidden">
+           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

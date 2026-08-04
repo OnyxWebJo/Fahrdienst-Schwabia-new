@@ -11,7 +11,7 @@ export default function EnglishBookingPage() {
   return (
     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100">
       <Header lang="en" />
-      <main className="flex-1">
+      <main className="flex-1 pb-24 lg:pb-0">
         <Suspense fallback={<div className="text-center py-20 text-slate-400">Loading booking form...</div>}>
           <BookingContent lang="en" />
         </Suspense>
