@@ -67,79 +67,72 @@ export const defaultBookings: BookingRecord[] = [
     status: "Neu",
     createdAt: new Date().toISOString(),
   },
-  {
-    id: "FS-109283",
-    name: "Alexander Becker",
-    phone: "+49 176 1092837",
-    email: "a.becker@beispiel.de",
-    direction: "toAirport",
-    tripType: "roundTrip",
-    route: "Augsburg ➔ Flughafen Stuttgart (STR)",
-    pickupAddress: "Haunstetter Str. 88, 86161 Augsburg",
-    dropoffAddress: "Flughafen Stuttgart Abflug E",
-    date: "2026-08-06",
-    time: "14:00",
-    returnDate: "2026-08-13",
-    returnTime: "18:30",
-    price: "400 €",
-    passengers: 3,
-    luggage: 4,
-    childSeats: 1,
-    flightNumber: "EW 2014",
-    notes: "Sperrgepäck: 1x Skitasche.",
-    status: "Fahrer zugewiesen",
-    createdAt: new Date().toISOString(),
-  },
-  {
-    id: "FS-771239",
-    name: "Michael Huber",
-    phone: "+49 170 3394812",
-    email: "m.huber@beispiel.de",
-    direction: "fromAirport",
-    tripType: "oneWay",
-    route: "Flughafen Nürnberg (NUE) ➔ Augsburg",
-    pickupAddress: "Flughafen Nürnberg Ankunft",
-    dropoffAddress: "Ulmer Str. 110, 86156 Augsburg",
-    date: "2026-08-04",
-    time: "11:00",
-    price: "240 €",
-    passengers: 4,
-    luggage: 4,
-    childSeats: 0,
-    flightNumber: "EW 7891",
-    notes: "",
-    status: "Abgeschlossen",
-    createdAt: new Date().toISOString(),
-  },
 ];
 
 export function getStoredBookings(): BookingRecord[] {
-  if (typeof window === "undefined") return defaultBookings;
+  if (typeof window === "undefined") return [];
   try {
     const saved = localStorage.getItem(BOOKINGS_STORAGE_KEY);
-    if (saved) {
+    if (saved !== null) {
       const parsed = JSON.parse(saved);
-      if (Array.isArray(parsed) && parsed.length > 0) {
+      if (Array.isArray(parsed)) {
         return parsed;
       }
     }
   } catch (e) {
     console.error("Failed to load stored bookings", e);
   }
-  return defaultBookings;
+  return [];
+}
+
+export async function syncServerBookings(): Promise<BookingRecord[]> {
+  if (typeof window === "undefined") return getStoredBookings();
+  try {
+    const res = await fetch("/api/bookings.php", { cache: "no-store" });
+    if (res.ok) {
+      const serverData = await res.json();
+      if (Array.isArray(serverData)) {
+        localStorage.setItem(BOOKINGS_STORAGE_KEY, JSON.stringify(serverData));
+        window.dispatchEvent(new CustomEvent("bookings-updated", { detail: serverData }));
+        return serverData;
+      }
+    }
+  } catch {
+    // Fallback quietly to localStorage
+  }
+  return getStoredBookings();
 }
 
 export function saveBooking(newBooking: BookingRecord): BookingRecord[] {
   const current = getStoredBookings();
-  const updated = [newBooking, ...current];
+  const updated = [newBooking, ...current.filter((b) => b.id !== newBooking.id)];
+  
   if (typeof window !== "undefined") {
     try {
       localStorage.setItem(BOOKINGS_STORAGE_KEY, JSON.stringify(updated));
       window.dispatchEvent(new CustomEvent("bookings-updated", { detail: updated }));
     } catch (e) {
-      console.error("Failed to save booking", e);
+      console.error("Failed to save booking to localStorage", e);
     }
+
+    // Persist to server backend
+    fetch("/api/bookings.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newBooking),
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (Array.isArray(data)) {
+          localStorage.setItem(BOOKINGS_STORAGE_KEY, JSON.stringify(data));
+          window.dispatchEvent(new CustomEvent("bookings-updated", { detail: data }));
+        }
+      })
+      .catch((err) => {
+        console.warn("Server sync error", err);
+      });
   }
+
   return updated;
 }
 
@@ -149,6 +142,7 @@ export function updateStoredBookingStatus(
 ): BookingRecord[] {
   const current = getStoredBookings();
   const updated = current.map((b) => (b.id === id ? { ...b, status: newStatus } : b));
+  
   if (typeof window !== "undefined") {
     try {
       localStorage.setItem(BOOKINGS_STORAGE_KEY, JSON.stringify(updated));
@@ -156,6 +150,20 @@ export function updateStoredBookingStatus(
     } catch (e) {
       console.error("Failed to update booking status", e);
     }
+
+    fetch("/api/bookings.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "update_status", id, status: newStatus }),
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (Array.isArray(data)) {
+          localStorage.setItem(BOOKINGS_STORAGE_KEY, JSON.stringify(data));
+          window.dispatchEvent(new CustomEvent("bookings-updated", { detail: data }));
+        }
+      })
+      .catch(() => {});
   }
   return updated;
 }
@@ -163,6 +171,7 @@ export function updateStoredBookingStatus(
 export function deleteStoredBooking(id: string): BookingRecord[] {
   const current = getStoredBookings();
   const updated = current.filter((b) => b.id !== id);
+
   if (typeof window !== "undefined") {
     try {
       localStorage.setItem(BOOKINGS_STORAGE_KEY, JSON.stringify(updated));
@@ -170,6 +179,20 @@ export function deleteStoredBooking(id: string): BookingRecord[] {
     } catch (e) {
       console.error("Failed to delete booking", e);
     }
+
+    fetch("/api/bookings.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "delete", id }),
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (Array.isArray(data)) {
+          localStorage.setItem(BOOKINGS_STORAGE_KEY, JSON.stringify(data));
+          window.dispatchEvent(new CustomEvent("bookings-updated", { detail: data }));
+        }
+      })
+      .catch(() => {});
   }
   return updated;
 }

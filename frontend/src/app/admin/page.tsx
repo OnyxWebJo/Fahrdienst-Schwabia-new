@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 import {
   getStoredBookings,
+  syncServerBookings,
   updateStoredBookingStatus,
   deleteStoredBooking,
   BookingRecord,
@@ -66,6 +67,14 @@ export default function AdminDashboardPage() {
     setPricing(getStoredPricing());
     setBookings(getStoredBookings());
 
+    // Initial server fetch to get mobile/tablet bookings
+    syncServerBookings().then((data) => setBookings(data));
+
+    // Poll every 10 seconds for new mobile bookings
+    const interval = setInterval(() => {
+      syncServerBookings().then((data) => setBookings(data));
+    }, 10000);
+
     const handleBookingsUpdate = () => {
       setBookings(getStoredBookings());
     };
@@ -74,6 +83,7 @@ export default function AdminDashboardPage() {
       window.addEventListener("bookings-updated", handleBookingsUpdate);
     }
     return () => {
+      clearInterval(interval);
       if (typeof window !== "undefined") {
         window.removeEventListener("bookings-updated", handleBookingsUpdate);
       }

@@ -112,7 +112,7 @@ export function Header({ lang = "de" }: HeaderProps) {
             : "bg-navy-900 border-b border-navy-800 py-3"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
+        <div className="relative z-[51] max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
           {/* Logo */}
           <Link
             href={basePath || "/"}
@@ -254,22 +254,46 @@ export function Header({ lang = "de" }: HeaderProps) {
           </div>
         </div>
 
+        {/* Backdrop: closes mobile menu on outside tap, prevents it blocking content below */}
+        {mobileMenuOpen && (
+          <div
+            className="lg:hidden fixed inset-0 bg-black/40"
+            style={{ zIndex: 48 }}
+            onClick={closeMobileMenu}
+            aria-hidden="true"
+          />
+        )}
+
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
           <div
-            className="lg:hidden bg-navy-950 border-t border-navy-800 px-4 pt-4 pb-24 space-y-1 animate-in slide-in-from-top-2"
+            className="lg:hidden bg-navy-950 border-t border-navy-800 px-4 pt-4 pb-24 space-y-1 animate-in slide-in-from-top-2 overflow-y-auto max-h-[calc(100vh-4.5rem)]"
             style={{ zIndex: 49 }}
           >
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={closeMobileMenu}
-                className="block px-4 py-3 rounded-xl text-base font-semibold text-slate-200 hover:bg-navy-800 hover:text-gold-400 active:bg-navy-700 transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isHash = link.href.includes("#");
+              return isHash ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => {
+                    setTimeout(closeMobileMenu, 100);
+                  }}
+                  className="block px-4 py-3 rounded-xl text-base font-semibold text-slate-200 hover:bg-navy-800 hover:text-gold-400 active:bg-navy-700 transition-colors"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={closeMobileMenu}
+                  className="block px-4 py-3 rounded-xl text-base font-semibold text-slate-200 hover:bg-navy-800 hover:text-gold-400 active:bg-navy-700 transition-colors"
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
 
             <div className="pt-3 border-t border-navy-800">
               <span className="block px-4 py-2 text-xs font-bold uppercase text-gold-400 tracking-wider">
@@ -288,13 +312,15 @@ export function Header({ lang = "de" }: HeaderProps) {
             </div>
 
             <div className="pt-4 border-t border-navy-800">
-              <Link
+              <a
                 href={`${basePath}/#booking`}
-                onClick={closeMobileMenu}
+                onClick={() => {
+                  setTimeout(closeMobileMenu, 100);
+                }}
                 className="block w-full text-center gold-gradient-bg text-navy-950 font-bold py-3.5 rounded-xl shadow-md text-sm"
               >
                 {dict.header.bookNow}
-              </Link>
+              </a>
             </div>
           </div>
         )}

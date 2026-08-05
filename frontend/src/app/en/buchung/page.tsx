@@ -1,11 +1,9 @@
-"use client";
-
 import { Suspense } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileBottomBar } from "@/components/layout/MobileBottomBar";
 import { CookieBanner } from "@/components/layout/CookieBanner";
-import { BookingContent } from "@/app/buchung/page";
+import { BookingContent } from "@/components/booking/BookingContent";
 
 export default function EnglishBookingPage() {
   return (

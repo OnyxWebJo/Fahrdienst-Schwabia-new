@@ -48,8 +48,13 @@ AddType image/x-icon .ico
 
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"
+  # Strip Range header to prevent Apache mod_deflate HTTP 206 partial content corruption on mobile Safari/Chrome
+  RequestHeader unset Range
 </IfModule>
 
 <IfModule mod_deflate.c>
+  # Disable Accept-Ranges for compressed responses so gzip doesn't corrupt on partial requests
+  Header set Accept-Ranges none
   AddOutputFilterByType DEFLATE text/html text/css application/javascript font/woff2
 </IfModule>
+

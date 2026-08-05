@@ -1,0 +1,272 @@
+diff --git a/frontend/src/app/agb/page.tsx b/frontend/src/app/agb/page.tsx
+index a0896d2..cf30b7f 100644
+--- a/frontend/src/app/agb/page.tsx
++++ b/frontend/src/app/agb/page.tsx
+@@ -13,7 +13,7 @@ export default function AGBPage() {
+     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100">
+       <Header lang="de" />
+ 
+-      <main className="flex-1 py-16">
++      <main className="flex-1 py-16 pb-24 lg:pb-0">
+         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 bg-navy-900 border border-navy-800 p-8 sm:p-12 rounded-3xl shadow-2xl">
+           <div className="border-b border-navy-800 pb-6 space-y-2">
+             <span className="text-xs font-bold uppercase tracking-widest text-gold-400">Rechtliches</span>
+diff --git a/frontend/src/app/buchung/page.tsx b/frontend/src/app/buchung/page.tsx
+index 6ffa502..93c84b9 100644
+--- a/frontend/src/app/buchung/page.tsx
++++ b/frontend/src/app/buchung/page.tsx
+@@ -689,7 +689,7 @@ export default function BookingPage({ params }: { params?: { lang?: Locale } })
+   return (
+     <div className="min-h-screen bg-navy-950 text-slate-100 flex flex-col justify-between">
+       <Header lang={lang} />
+-      <main className="flex-1">
++      <main className="flex-1 pb-24 lg:pb-0">
+         <Suspense fallback={<div className="text-center py-20 text-slate-400 text-xs">Loading booking form...</div>}>
+           <BookingContent lang={lang} />
+         </Suspense>
+diff --git a/frontend/src/app/datenschutz/page.tsx b/frontend/src/app/datenschutz/page.tsx
+index eddbf43..3f62e25 100644
+--- a/frontend/src/app/datenschutz/page.tsx
++++ b/frontend/src/app/datenschutz/page.tsx
+@@ -13,7 +13,7 @@ export default function DatenschutzPage() {
+     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100">
+       <Header lang="de" />
+ 
+-      <main className="flex-1 py-16">
++      <main className="flex-1 py-16 pb-24 lg:pb-0">
+         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 bg-navy-900 border border-navy-800 p-8 sm:p-12 rounded-3xl shadow-2xl">
+           <div className="border-b border-navy-800 pb-6 space-y-2">
+             <span className="text-xs font-bold uppercase tracking-widest text-gold-400">DSGVO / GDPR</span>
+diff --git a/frontend/src/app/en/buchung/page.tsx b/frontend/src/app/en/buchung/page.tsx
+index a647a88..a4dc040 100644
+--- a/frontend/src/app/en/buchung/page.tsx
++++ b/frontend/src/app/en/buchung/page.tsx
+@@ -11,7 +11,7 @@ export default function EnglishBookingPage() {
+   return (
+     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100">
+       <Header lang="en" />
+-      <main className="flex-1">
++      <main className="flex-1 pb-24 lg:pb-0">
+         <Suspense fallback={<div className="text-center py-20 text-slate-400">Loading booking form...</div>}>
+           <BookingContent lang="en" />
+         </Suspense>
+diff --git a/frontend/src/app/en/imprint/page.tsx b/frontend/src/app/en/imprint/page.tsx
+index e1c4968..0b91968 100644
+--- a/frontend/src/app/en/imprint/page.tsx
++++ b/frontend/src/app/en/imprint/page.tsx
+@@ -14,7 +14,7 @@ export default function EnglishImprintPage() {
+     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100">
+       <Header lang="en" />
+ 
+-      <main className="flex-1 py-16">
++      <main className="flex-1 py-16 pb-24 lg:pb-0">
+         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 bg-navy-900 border border-navy-800 p-8 sm:p-12 rounded-3xl shadow-2xl">
+           <div className="border-b border-navy-800 pb-6 space-y-2">
+             <span className="text-xs font-bold uppercase tracking-widest text-gold-400">Legal Info</span>
+diff --git a/frontend/src/app/en/page.tsx b/frontend/src/app/en/page.tsx
+index 1cf991e..4d54f69 100644
+--- a/frontend/src/app/en/page.tsx
++++ b/frontend/src/app/en/page.tsx
+@@ -52,7 +52,7 @@ export default function EnglishHomePage() {
+       />
+ 
+       <Header lang="en" />
+-      <main className="flex-1">
++      <main className="flex-1 pb-24 lg:pb-0">
+         <HeroSection lang="en" />
+         <ServicesSection lang="en" />
+         <WhyChooseUsSection lang="en" />
+diff --git a/frontend/src/app/en/privacy-policy/page.tsx b/frontend/src/app/en/privacy-policy/page.tsx
+index eb12c48..660036a 100644
+--- a/frontend/src/app/en/privacy-policy/page.tsx
++++ b/frontend/src/app/en/privacy-policy/page.tsx
+@@ -13,7 +13,7 @@ export default function EnglishPrivacyPage() {
+     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100">
+       <Header lang="en" />
+ 
+-      <main className="flex-1 py-16">
++      <main className="flex-1 py-16 pb-24 lg:pb-0">
+         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 bg-navy-900 border border-navy-800 p-8 sm:p-12 rounded-3xl shadow-2xl">
+           <div className="border-b border-navy-800 pb-6 space-y-2">
+             <span className="text-xs font-bold uppercase tracking-widest text-gold-400">GDPR Compliance</span>
+diff --git a/frontend/src/app/en/terms/page.tsx b/frontend/src/app/en/terms/page.tsx
+index 6eed2b8..e16d56b 100644
+--- a/frontend/src/app/en/terms/page.tsx
++++ b/frontend/src/app/en/terms/page.tsx
+@@ -13,7 +13,7 @@ export default function EnglishTermsPage() {
+     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100">
+       <Header lang="en" />
+ 
+-      <main className="flex-1 py-16">
++      <main className="flex-1 py-16 pb-24 lg:pb-0">
+         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 bg-navy-900 border border-navy-800 p-8 sm:p-12 rounded-3xl shadow-2xl">
+           <div className="border-b border-navy-800 pb-6 space-y-2">
+             <span className="text-xs font-bold uppercase tracking-widest text-gold-400">Legal Agreement</span>
+diff --git a/frontend/src/app/impressum/page.tsx b/frontend/src/app/impressum/page.tsx
+index 03deea5..c761e7b 100644
+--- a/frontend/src/app/impressum/page.tsx
++++ b/frontend/src/app/impressum/page.tsx
+@@ -14,7 +14,7 @@ export default function ImpressumPage() {
+     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100">
+       <Header lang="de" />
+ 
+-      <main className="flex-1 py-16">
++      <main className="flex-1 py-16 pb-24 lg:pb-0">
+         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 bg-navy-900 border border-navy-800 p-8 sm:p-12 rounded-3xl shadow-2xl">
+           <div className="border-b border-navy-800 pb-6 space-y-2">
+             <span className="text-xs font-bold uppercase tracking-widest text-gold-400">Rechtliches</span>
+diff --git a/frontend/src/app/layout.tsx b/frontend/src/app/layout.tsx
+index 467e494..e3e2fc1 100644
+--- a/frontend/src/app/layout.tsx
++++ b/frontend/src/app/layout.tsx
+@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
+ import { Inter, Montserrat } from "next/font/google";
+ import Script from "next/script";
+ import "./globals.css";
++import DiagCanary from "@/components/DiagCanary"; // DIAG_REMOVE_ME
+ 
+ const inter = Inter({
+   subsets: ["latin"],
+@@ -38,6 +39,62 @@ export const metadata: Metadata = {
+   ],
+ };
+ 
++const DIAG_SCRIPT = `
++(function () {
++  try {
++    if (window.location.search.indexOf('debug=1') === -1) return;
++    var buffered = [];
++    var box = null;
++    function fmt(msg) {
++      var t = new Date().toISOString().split('T')[1].split('Z')[0];
++      return '[' + t + '] ' + msg;
++    }
++    function log(msg) {
++      var line = fmt(msg);
++      buffered.push(line);
++      if (box) {
++        box.textContent += line + '\\n';
++        box.scrollTop = box.scrollHeight;
++      }
++    }
++    window.__diagLog = log;
++    log('DIAG SCRIPT LOADED (pre-hydration).');
++    window.addEventListener('error', function (e) {
++      log('JS ERROR: ' + e.message + ' @ ' + e.filename + ':' + e.lineno);
++    });
++    window.addEventListener('unhandledrejection', function (e) {
++      log('PROMISE REJECTION: ' + (e.reason && e.reason.message ? e.reason.message : e.reason));
++    });
++    document.addEventListener('touchend', function (e) {
++      var t = e.target;
++      var desc = t.tagName + (t.id ? '#' + t.id : '') + (t.className ? '.' + String(t.className).split(' ').slice(0,2).join('.') : '');
++      log('touchend on: ' + desc);
++    }, true);
++    document.addEventListener('click', function (e) {
++      var t = e.target;
++      var desc = t.tagName + (t.id ? '#' + t.id : '') + (t.className ? '.' + String(t.className).split(' ').slice(0,2).join('.') : '');
++      log('click on: ' + desc + (e.defaultPrevented ? ' (default prevented)' : ''));
++    }, true);
++    function createBoxAndFlush() {
++      box = document.createElement('div');
++      box.id = '__diag_box';
++      box.style.cssText = 'position:fixed;top:0;left:0;right:0;max-height:45vh;overflow:auto;background:rgba(0,0,0,.92);color:#0f0;font:11px/1.4 monospace;padding:8px;z-index:2147483647;white-space:pre-wrap;';
++      document.body.appendChild(box);
++      box.textContent = buffered.join('\\n') + '\\n';
++      log(window.__reactHydrated ? 'CONFIRMED: React hydrated.' : 'WARNING: React did NOT signal hydration yet.');
++    }
++    window.addEventListener('load', function () {
++      setTimeout(createBoxAndFlush, 800);
++    });
++    setTimeout(function () {
++      if (!box) createBoxAndFlush();
++    }, 6000);
++  } catch (err) {
++    console.error('diag init failed', err);
++  }
++})();
++`;
++
+ export default function RootLayout({
+   children,
+ }: Readonly<{
+@@ -68,7 +125,18 @@ export default function RootLayout({
+         suppressHydrationWarning
+         className="min-h-full flex flex-col bg-slate-50 text-slate-900 selection:bg-amber-500 selection:text-white"
+       >
++        {/* TEMPORARY DIAGNOSTIC: visit any page with ?debug=1 on your phone to see a
++            live on-screen log of JS errors, hydration status, and tap events.
++            Safe to remove once the mobile issue is found — search "DIAG_REMOVE_ME".
++            Placed as the first child of <body>, runs synchronously, independent of
++            React/hydration, and only creates a visible element well after load
++            to avoid disturbing hydration itself. */}
++        <script
++          id="diag-remove-me"
++          dangerouslySetInnerHTML={{ __html: DIAG_SCRIPT }}
++        />
+         {children}
++        <DiagCanary /> {/* DIAG_REMOVE_ME */}
+       </body>
+     </html>
+   );
+diff --git a/frontend/src/app/page.tsx b/frontend/src/app/page.tsx
+index dda0bd4..7f03bd9 100644
+--- a/frontend/src/app/page.tsx
++++ b/frontend/src/app/page.tsx
+@@ -52,7 +52,7 @@ export default function GermanHomePage() {
+       />
+ 
+       <Header lang="de" />
+-      <main className="flex-1">
++      <main className="flex-1 pb-24 lg:pb-0">
+         <HeroSection lang="de" />
+         <ServicesSection lang="de" />
+         <WhyChooseUsSection lang="de" />
+diff --git a/frontend/src/components/layout/Header.tsx b/frontend/src/components/layout/Header.tsx
+index 4142dff..2ecb511 100644
+--- a/frontend/src/components/layout/Header.tsx
++++ b/frontend/src/components/layout/Header.tsx
+@@ -112,7 +112,7 @@ export function Header({ lang = "de" }: HeaderProps) {
+             : "bg-navy-900 border-b border-navy-800 py-3"
+         }`}
+       >
+-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
++        <div className="relative z-[51] max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
+           {/* Logo */}
+           <Link
+             href={basePath || "/"}
+@@ -250,10 +250,20 @@ export function Header({ lang = "de" }: HeaderProps) {
+           </div>
+         </div>
+ 
++        {/* Backdrop: closes mobile menu on outside tap, prevents it blocking content below */}
++        {mobileMenuOpen && (
++          <div
++            className="lg:hidden fixed inset-0 bg-black/40"
++            style={{ zIndex: 48 }}
++            onClick={closeMobileMenu}
++            aria-hidden="true"
++          />
++        )}
++
+         {/* Mobile Navigation Drawer */}
+         {mobileMenuOpen && (
+           <div
+-            className="lg:hidden bg-navy-950 border-t border-navy-800 px-4 pt-4 pb-24 space-y-1 animate-in slide-in-from-top-2"
++            className="lg:hidden bg-navy-950 border-t border-navy-800 px-4 pt-4 pb-24 space-y-1 animate-in slide-in-from-top-2 overflow-y-auto max-h-[calc(100vh-4.5rem)]"
+             style={{ zIndex: 49 }}
+           >
+             {navLinks.map((link) => (
+diff --git a/frontend/src/components/templates/AirportLandingPage.tsx b/frontend/src/components/templates/AirportLandingPage.tsx
+index b1cbfc0..2dacb39 100644
+--- a/frontend/src/components/templates/AirportLandingPage.tsx
++++ b/frontend/src/components/templates/AirportLandingPage.tsx
+@@ -43,7 +43,7 @@ export function AirportLandingPage({ lang = "de", config }: AirportLandingPagePr
+     <div className="min-h-screen flex flex-col bg-navy-950 text-slate-100 selection:bg-amber-500 selection:text-white">
+       <Header lang={lang} />
+ 
+-      <main className="flex-1">
++      <main className="flex-1 pb-24 lg:pb-0">
+         {/* Route Hero Section */}
+         <section className="relative pt-10 pb-16 bg-navy-950 border-b border-navy-800 overflow-hidden">
+           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
